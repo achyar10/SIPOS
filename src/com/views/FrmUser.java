@@ -224,8 +224,9 @@ public class FrmUser extends javax.swing.JFrame {
             if(btn_simpan.getText().equals("Batal")){
              model.Bersih(this);
              btn_simpan.setText("Simpan");
-         }
+         } else if(btn_simpan.getText().equals("Simpan")){
             model.Simpan(this);
+         }
         } catch (SQLException ex) {
             Logger.getLogger(FrmUser.class.getName()).log(Level.SEVERE, null, ex);
         }

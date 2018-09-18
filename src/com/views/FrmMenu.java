@@ -190,7 +190,11 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        new FrmKategori().setVisible(true);
+        try {
+            new FrmKategori().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
 
