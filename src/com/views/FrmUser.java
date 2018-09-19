@@ -223,6 +223,7 @@ public class FrmUser extends javax.swing.JFrame {
         try {
             if(btn_simpan.getText().equals("Batal")){
              model.Bersih(this);
+             model.AutoNomor(this);
              btn_simpan.setText("Simpan");
          } else if(btn_simpan.getText().equals("Simpan")){
             model.Simpan(this);
