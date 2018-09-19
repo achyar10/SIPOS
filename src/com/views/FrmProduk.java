@@ -18,14 +18,23 @@ import javax.swing.table.*;
 public class FrmProduk extends javax.swing.JFrame {
 
     public DefaultTableModel tbl;
-    String header[] = {"Kode Barang", "Nama Barang", "Kategori", "Harga", "Tanggal Kadaluarsa"};
+    String header[] = {"Kode Barang", "Nama Barang", "Harga", "Kategori", "Tanggal Kadaluarsa"};
     Produk_model model = new Produk_model();
     
     public String tglkadal;
     SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
     
-    public FrmProduk() {
+    public FrmProduk() throws SQLException {
         initComponents();
+        txt_produk_ex.setDateFormatString("dd-MM-yyyy");
+        tbl = new DefaultTableModel(null, header);
+        tbl_produk.setModel(tbl);
+        tbl_produk.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        model.Tampil(this);
+        model.Combo(this);
+        txt_kat_id.setVisible(false);
+        txt_produk_kode.requestFocus();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -54,7 +63,7 @@ public class FrmProduk extends javax.swing.JFrame {
         btn_hapus = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_produk = new javax.swing.JTable();
         txt_produk_cari = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -79,6 +88,11 @@ public class FrmProduk extends javax.swing.JFrame {
         jLabel6.setText("Tanggal Kadaluarsa");
 
         cmb_kat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Kategori--" }));
+        cmb_kat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_katActionPerformed(evt);
+            }
+        });
 
         txt_produk_ex.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -94,8 +108,18 @@ public class FrmProduk extends javax.swing.JFrame {
         });
 
         btn_ubah.setText("Ubah");
+        btn_ubah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ubahActionPerformed(evt);
+            }
+        });
 
         btn_hapus.setText("Hapus");
+        btn_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hapusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -171,7 +195,7 @@ public class FrmProduk extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel1.setText("MENU PRODUK");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_produk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -182,11 +206,32 @@ public class FrmProduk extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tbl_produk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_produkMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbl_produk);
+
+        txt_produk_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_produk_cariActionPerformed(evt);
+            }
+        });
+        txt_produk_cari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_produk_cariKeyTyped(evt);
+            }
+        });
 
         jLabel7.setText("Pencarian Produk");
 
         jButton1.setText("Kembali");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -239,8 +284,67 @@ public class FrmProduk extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_produk_exPropertyChange
 
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
-        // TODO add your handling code here:
+       try {
+            if(btn_simpan.getText().equals("Batal")) {
+                model.Bersih(this);
+                btn_simpan.setText("Simpan");
+            } else if(btn_simpan.getText().equals("Simpan")) {
+            model.Simpan(this);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPemasok.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_simpanActionPerformed
+
+    private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
+        try {
+            model.Hapus(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmProduk.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_hapusActionPerformed
+
+    private void btn_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ubahActionPerformed
+        try {
+            model.Ubah(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmProduk.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_ubahActionPerformed
+
+    private void tbl_produkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_produkMouseClicked
+        try {
+            model.KlikTabel(this);
+            btn_simpan.setText("Batal");
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPemasok.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tbl_produkMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new FrmMenu().show();
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cmb_katActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_katActionPerformed
+        try {
+            model.Combo2(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmProduk.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmb_katActionPerformed
+
+    private void txt_produk_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_produk_cariActionPerformed
+        
+    }//GEN-LAST:event_txt_produk_cariActionPerformed
+
+    private void txt_produk_cariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_produk_cariKeyTyped
+        try {
+            model.Cari(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmProduk.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txt_produk_cariKeyTyped
 
     /**
      * @param args the command line arguments
@@ -272,7 +376,11 @@ public class FrmProduk extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmProduk().setVisible(true);
+                try {
+                    new FrmProduk().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmProduk.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -292,7 +400,7 @@ public class FrmProduk extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable tbl_produk;
     public javax.swing.JTextField txt_kat_id;
     public javax.swing.JTextField txt_produk_cari;
     public com.toedter.calendar.JDateChooser txt_produk_ex;
