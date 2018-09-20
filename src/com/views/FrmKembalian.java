@@ -1,21 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.views;
+
+import com.models.Kembalian_model;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author achyar
  */
 public class FrmKembalian extends javax.swing.JFrame {
-
-    /**
-     * Creates new form FrmKembalian
-     */
+    
+    Kembalian_model model = new Kembalian_model();
+    
     public FrmKembalian() {
         initComponents();
+        this.getRootPane().setDefaultButton(ok);
+        ok.requestFocus();
+        ok.setVisible(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -27,31 +31,68 @@ public class FrmKembalian extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbl_nama = new javax.swing.JLabel();
         lbl_kembalian = new javax.swing.JLabel();
+        ok = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lbl_kembalian.setText("Kembalian");
+        lbl_nama.setFont(new java.awt.Font("Lucida Grande", 1, 48)); // NOI18N
+        lbl_nama.setText("Kembalian");
+
+        lbl_kembalian.setFont(new java.awt.Font("Lucida Grande", 1, 48)); // NOI18N
+        lbl_kembalian.setForeground(new java.awt.Color(102, 102, 255));
+        lbl_kembalian.setText("10000");
+
+        ok.setText("ok");
+        ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addComponent(lbl_kembalian)
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addComponent(lbl_nama))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(107, 107, 107)
+                                .addComponent(lbl_kembalian)))
+                        .addGap(0, 64, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(ok)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addContainerGap()
+                .addComponent(lbl_nama)
+                .addGap(18, 18, 18)
                 .addComponent(lbl_kembalian)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ok)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
+        try {
+            model.Bersih(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmKembalian.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_okActionPerformed
 
     /**
      * @param args the command line arguments
@@ -90,5 +131,7 @@ public class FrmKembalian extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel lbl_kembalian;
+    public static javax.swing.JLabel lbl_nama;
+    public static javax.swing.JButton ok;
     // End of variables declaration//GEN-END:variables
 }

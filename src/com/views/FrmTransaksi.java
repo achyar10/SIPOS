@@ -184,6 +184,11 @@ public class FrmTransaksi extends javax.swing.JFrame {
         txt_kembali.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
 
         btn_cari.setText("Cari Produk");
+        btn_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cariActionPerformed(evt);
+            }
+        });
 
         btn_hapus.setText("Hapus Produk");
         btn_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -350,7 +355,7 @@ public class FrmTransaksi extends javax.swing.JFrame {
             model.Kembalian(this);
         } catch (SQLException ex) {
             Logger.getLogger(FrmTransaksi.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }//GEN-LAST:event_txt_bayarActionPerformed
 
     private void tbl_transaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_transaksiMouseClicked
@@ -404,6 +409,14 @@ public class FrmTransaksi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_produk_kodeKeyPressed
 
+    private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed
+        try {
+            new FrmCariProduk().show();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmTransaksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_cariActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -447,7 +460,7 @@ public class FrmTransaksi extends javax.swing.JFrame {
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_cari;
     private javax.swing.JButton btn_hapus;
-    private javax.swing.JButton btn_ok;
+    public static javax.swing.JButton btn_ok;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -458,16 +471,16 @@ public class FrmTransaksi extends javax.swing.JFrame {
     public static javax.swing.JTextField txt_bayar;
     public static javax.swing.JTextField txt_kembali;
     public static javax.swing.JTextField txt_pengguna_id;
-    public javax.swing.JTextField txt_pengguna_nama;
-    public javax.swing.JTextField txt_produk_harga;
-    public javax.swing.JTextField txt_produk_kode;
-    public javax.swing.JTextField txt_produk_nama;
+    public static javax.swing.JTextField txt_pengguna_nama;
+    public static javax.swing.JTextField txt_produk_harga;
+    public static javax.swing.JTextField txt_produk_kode;
+    public static javax.swing.JTextField txt_produk_nama;
     public static javax.swing.JTextField txt_total_1;
     public static javax.swing.JTextField txt_total_2;
-    public javax.swing.JTextField txt_transaksi_id;
-    public javax.swing.JTextField txt_transaksi_id2;
-    public javax.swing.JTextField txt_transaksi_kode;
-    public javax.swing.JTextField txt_transaksi_qty;
-    public javax.swing.JTextField txt_transaksi_tgl;
+    public static javax.swing.JTextField txt_transaksi_id;
+    public static javax.swing.JTextField txt_transaksi_id2;
+    public static javax.swing.JTextField txt_transaksi_kode;
+    public static javax.swing.JTextField txt_transaksi_qty;
+    public static javax.swing.JTextField txt_transaksi_tgl;
     // End of variables declaration//GEN-END:variables
 }
