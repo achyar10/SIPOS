@@ -10,6 +10,7 @@ import com.koneksi.UserID;
 import com.koneksi.koneksi;
 import com.views.FrmLogin;
 import com.views.FrmMenu;
+import com.views.FrmTransaksi;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -33,11 +34,12 @@ public class Login_model implements Login {
             if (rs.next()) {
                 UserID.setUserLogin(lgn.txt_username.getText());
                 UserID.setNameUserLogin(rs.getString("pengguna_nama"));
+                UserID.setIdUserLogin(rs.getString("pengguna_id"));
                 if(rs.getString("pengguna_level").equals("ADMIN")){
                     new FrmMenu().show();
                     lgn.dispose();
                 }else if(rs.getString("pengguna_level").equals("KASIR")){
-//                    new FrmKasir().show();
+                    new FrmTransaksi().show();
                     lgn.dispose();
                 } else {
                     JOptionPane.showMessageDialog(lgn, "Password Salah");

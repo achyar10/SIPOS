@@ -8,6 +8,7 @@ package com.koneksi;
 public class UserID {
     private static  String username;
     private static  String ufullname;
+    private static  String uid;
     
     public static void setUserLogin(String username) {
         UserID.username = username;
@@ -23,6 +24,14 @@ public class UserID {
     
     public static String getNameUserLogin(){
         return ufullname;
+    }
+    
+    public static void setIdUserLogin(String uid) {
+        UserID.uid = uid;
+    }
+    
+    public static String getIdUserLogin(){
+        return uid;
     }
     
 }

@@ -3,6 +3,7 @@ package com.models;
 
 import com.controllers.Transaksi;
 import com.koneksi.koneksi;
+import com.views.FrmKembalian;
 import com.views.FrmTransaksi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -36,10 +39,10 @@ public class Transaksi_model implements Transaksi {
             
             prepare.setString(1, trx.txt_transaksi_id.getText());
             prepare.setString(2, trx.txt_transaksi_kode.getText());
-            prepare.setString(3, trx.txt_pengguna_nama.getText());
-            prepare.setString(4, trx.txt_transaksi_tgl.getText());
-            prepare.setString(5, trx.txt_produk_harga.getText());
-            prepare.setString(6, trx.txt_transaksi_qty.getText());
+            prepare.setString(3, trx.txt_transaksi_tgl.getText());
+            prepare.setString(4, trx.txt_produk_harga.getText());
+            prepare.setString(5, trx.txt_transaksi_qty.getText());
+            prepare.setString(6, trx.txt_pengguna_id.getText());
             prepare.executeUpdate();
             
             prepare.close();
@@ -116,7 +119,7 @@ public class Transaksi_model implements Transaksi {
             String sql = "SELECT a.transaksi_id, c.produk_kode, c.produk_nama, c.produk_harga, a.transaksi_qty, a.transaksi_harga FROM transaksi "
                     + "a JOIN detail_transaksi b ON b.transaksi_id = a.transaksi_id "
                     + "JOIN produk c ON c.produk_kode = b.produk_kode "
-                    + "WHERE a.kode_transaksi='"+trx.txt_transaksi_kode.getText()+"' ORDER BY a.transaksi_id ASC";
+                    + "WHERE a.transaksi_kode='"+trx.txt_transaksi_kode.getText()+"' ORDER BY a.transaksi_id ASC";
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 Object[] data = new Object[6];
@@ -135,7 +138,21 @@ public class Transaksi_model implements Transaksi {
 
     @Override
     public void KlikTabel(FrmTransaksi trx) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            int pilih = trx.tbl_transaksi.getSelectedRow();
+            if (pilih == -1) {
+                return;
+            }
+            trx.txt_transaksi_id2.setText(trx.tbl.getValueAt(pilih, 0).toString());
+            trx.txt_produk_kode.setText(trx.tbl.getValueAt(pilih, 1).toString());
+            trx.txt_produk_nama.setText(trx.tbl.getValueAt(pilih, 2).toString());
+            trx.txt_produk_harga.setText(trx.tbl.getValueAt(pilih, 3).toString());
+            trx.txt_transaksi_qty.setText(trx.tbl.getValueAt(pilih, 4).toString());
+        } catch (Exception e) {
+        } finally {
+            trx.txt_transaksi_qty.requestFocus();
+            trx.txt_transaksi_qty.setText(null);
+        }
     }
 
     @Override
@@ -209,17 +226,42 @@ public class Transaksi_model implements Transaksi {
 
     @Override
     public void Total(FrmTransaksi trx) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int JumlahBaris = trx.tbl_transaksi.getRowCount();
+        int Total = 0;
+        int Harga_Barang;
+        TableModel tableModel;
+        tableModel = trx.tbl_transaksi.getModel();
+        for (int i = 0; i < JumlahBaris; i++) {
+            Harga_Barang = Integer.parseInt(tableModel.getValueAt(i, 5).toString());
+            Total = (Total + Harga_Barang);
+            trx.txt_total_1.setText(String.valueOf(Total));
+            trx.txt_total_2.setText("Total "+String.valueOf(Total));
+        }
     }
 
     @Override
     public void Kembalian(FrmTransaksi trx) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double total = Double.valueOf(trx.txt_total_1.getText());
+        double bayar = Double.valueOf(trx.txt_bayar.getText());
+        double kembalian = (bayar-total);
+        if (bayar < total){
+            JOptionPane.showMessageDialog(null, "Maaf, Uang anda tidak cukup!!!");
+        } else {
+        trx.txt_kembali.setText(String.valueOf(kembalian));
+        trx.txt_total_2.setText("-" +String.valueOf(kembalian));
+        new FrmKembalian().show();
+        FrmKembalian.lbl_kembalian.setText(String.valueOf(kembalian)); 
+        }
     }
 
     @Override
     public void UbahJumlah(FrmTransaksi trx) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double harga = Double.valueOf(trx.txt_produk_harga.getText());
+        double jumlah = Double.valueOf(trx.txt_transaksi_qty.getText());
+        double jumlah_baru = (harga*jumlah);
+        trx.txt_produk_harga.setText(String.valueOf(jumlah_baru));
+        Ubah(trx);
+        Total(trx);
     }
 
     @Override
