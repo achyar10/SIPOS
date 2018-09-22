@@ -198,6 +198,11 @@ public class FrmTransaksi extends javax.swing.JFrame {
         });
 
         btn_back.setText("Kembali ke Menu");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -331,7 +336,7 @@ public class FrmTransaksi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_total_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_total_2ActionPerformed
-        // TODO add your handling code here:
+        new FrmMenu().show();
     }//GEN-LAST:event_txt_total_2ActionPerformed
 
     private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_okActionPerformed
@@ -416,6 +421,10 @@ public class FrmTransaksi extends javax.swing.JFrame {
             Logger.getLogger(FrmTransaksi.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_cariActionPerformed
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_backActionPerformed
 
     /**
      * @param args the command line arguments

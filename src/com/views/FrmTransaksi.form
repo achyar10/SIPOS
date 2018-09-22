@@ -422,6 +422,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Kembali ke Menu"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_backActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_transaksi_id2">
       <AuxValues>
