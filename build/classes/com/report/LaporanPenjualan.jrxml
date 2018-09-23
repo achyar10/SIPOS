@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LaporanPenjualan" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4416cf0d-cb32-4867-b449-585626d4aa0e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     detail_transaksi.`transaksi_id` AS detail_transaksi_transaksi_id,
+     detail_transaksi.`produk_kode` AS detail_transaksi_produk_kode,
+     kategori.`kategori_id` AS kategori_kategori_id,
+     kategori.`kategori_nama` AS kategori_kategori_nama,
+     pemasok.`pemasok_id` AS pemasok_pemasok_id,
+     pemasok.`pemasok_nama` AS pemasok_pemasok_nama,
+     pemasok.`pemasok_tlp` AS pemasok_pemasok_tlp,
+     pemasok.`pemasok_alamat` AS pemasok_pemasok_alamat,
+     pembelian.`pembelian_id` AS pembelian_pembelian_id,
+     pembelian.`pembelian_faktur` AS pembelian_pembelian_faktur,
+     pembelian.`pembelian_tanggal` AS pembelian_pembelian_tanggal,
+     pembelian.`pembelian_jumlah_harga` AS pembelian_pembelian_jumlah_harga,
+     pembelian.`pemasok_pemasok_id` AS pembelian_pemasok_pemasok_id,
+     pengguna.`pengguna_id` AS pengguna_pengguna_id,
+     pengguna.`pengguna_username` AS pengguna_pengguna_username,
+     pengguna.`pengguna_password` AS pengguna_pengguna_password,
+     pengguna.`pengguna_nama` AS pengguna_pengguna_nama,
+     pengguna.`pengguna_level` AS pengguna_pengguna_level,
+     produk.`produk_kode` AS produk_produk_kode,
+     produk.`produk_nama` AS produk_produk_nama,
+     produk.`produk_harga` AS produk_produk_harga,
+     produk.`kategori_kategori_id` AS produk_kategori_kategori_id,
+     produk.`produk_tgl_ex` AS produk_produk_tgl_ex,
+     transaksi.`transaksi_id` AS transaksi_transaksi_id,
+     transaksi.`transaksi_kode` AS transaksi_transaksi_kode,
+     transaksi.`transaksi_tgl` AS transaksi_transaksi_tgl,
+     transaksi.`transaksi_harga` AS transaksi_transaksi_harga,
+     transaksi.`transaksi_qty` AS transaksi_transaksi_qty,
+     transaksi.`pengguna_pengguna_id` AS transaksi_pengguna_pengguna_id
+FROM
+     `pemasok` pemasok INNER JOIN `pembelian` pembelian ON pemasok.`pemasok_id` = pembelian.`pemasok_pemasok_id`,
+     `kategori` kategori INNER JOIN `produk` produk ON kategori.`kategori_id` = produk.`kategori_kategori_id`
+     INNER JOIN `detail_transaksi` detail_transaksi ON produk.`produk_kode` = detail_transaksi.`produk_kode`
+     INNER JOIN `transaksi` transaksi ON detail_transaksi.`transaksi_id` = transaksi.`transaksi_id`
+     INNER JOIN `pengguna` pengguna ON transaksi.`pengguna_pengguna_id` = pengguna.`pengguna_id`]]>
+	</queryString>
+	<field name="detail_transaksi_transaksi_id" class="java.lang.Integer"/>
+	<field name="detail_transaksi_produk_kode" class="java.lang.String"/>
+	<field name="kategori_kategori_id" class="java.lang.Integer"/>
+	<field name="kategori_kategori_nama" class="java.lang.String"/>
+	<field name="pemasok_pemasok_id" class="java.lang.Integer"/>
+	<field name="pemasok_pemasok_nama" class="java.lang.String"/>
+	<field name="pemasok_pemasok_tlp" class="java.lang.String"/>
+	<field name="pemasok_pemasok_alamat" class="java.lang.String"/>
+	<field name="pembelian_pembelian_id" class="java.lang.Integer"/>
+	<field name="pembelian_pembelian_faktur" class="java.lang.String"/>
+	<field name="pembelian_pembelian_tanggal" class="java.sql.Date"/>
+	<field name="pembelian_pembelian_jumlah_harga" class="java.math.BigDecimal"/>
+	<field name="pembelian_pemasok_pemasok_id" class="java.lang.Integer"/>
+	<field name="pengguna_pengguna_id" class="java.lang.Integer"/>
+	<field name="pengguna_pengguna_username" class="java.lang.String"/>
+	<field name="pengguna_pengguna_password" class="java.lang.String"/>
+	<field name="pengguna_pengguna_nama" class="java.lang.String"/>
+	<field name="pengguna_pengguna_level" class="java.lang.String"/>
+	<field name="produk_produk_kode" class="java.lang.String"/>
+	<field name="produk_produk_nama" class="java.lang.String"/>
+	<field name="produk_produk_harga" class="java.math.BigDecimal"/>
+	<field name="produk_kategori_kategori_id" class="java.lang.Integer"/>
+	<field name="produk_produk_tgl_ex" class="java.sql.Date"/>
+	<field name="transaksi_transaksi_id" class="java.lang.Integer"/>
+	<field name="transaksi_transaksi_kode" class="java.lang.Integer"/>
+	<field name="transaksi_transaksi_tgl" class="java.sql.Date"/>
+	<field name="transaksi_transaksi_harga" class="java.math.BigDecimal"/>
+	<field name="transaksi_transaksi_qty" class="java.lang.Integer"/>
+	<field name="transaksi_pengguna_pengguna_id" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79">
+			<staticText>
+				<reportElement x="297" y="12" width="234" height="46" uuid="3d8a1970-ecea-41dc-945b-f81113295a01"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Laporan Penjualan]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
