@@ -113,6 +113,8 @@ public class Kategori_model implements Kategori {
     @Override
     public void KlikTabel(FrmKategori ktg) throws SQLException {
         try {
+            ktg.btn_ubah.setVisible(true);
+            ktg.btn_hapus.setVisible(true);
             int pilih = ktg.tblKategori.getSelectedRow();
             if (pilih == -1) {
                 return;

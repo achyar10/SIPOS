@@ -130,6 +130,8 @@ public class Pembelian_model implements Pembelian {
     @Override
     public void KlikTabel(FrmPembelian pb) throws SQLException {
         try {
+            pb.btn_ubah.setVisible(true);
+            pb.btn_hapus.setVisible(true);
             int pilih = pb.tbl_pembelian.getSelectedRow();
             String s = (String)pb.tbl_pembelian.getModel().getValueAt(pilih, 2);
             SimpleDateFormat f = new SimpleDateFormat("yyyy-M-dd");

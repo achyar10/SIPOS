@@ -130,6 +130,8 @@ public class User_model implements User {
     @Override
     public void KlikTabel(FrmUser usr) throws SQLException {
         try {
+            usr.btn_ubah.setVisible(true);
+            usr.btn_hapus.setVisible(true);
             int pilih = usr.tblUser.getSelectedRow();
             if (pilih == -1) {
                 return;

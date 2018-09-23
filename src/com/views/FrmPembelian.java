@@ -34,6 +34,8 @@ public class FrmPembelian extends javax.swing.JFrame {
         model.Combo(this);
         model.AutoNomor(this);
         model.NoFaktur(this);
+        btn_ubah.setVisible(false);
+        btn_hapus.setVisible(false);
         txt_pemasok_id.setVisible(false);
         txt_pembelian_id.setVisible(false);
         this.setLocationRelativeTo(null);
@@ -74,20 +76,31 @@ public class FrmPembelian extends javax.swing.JFrame {
         jLabel1.setText("Menu Pembelian");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(txt_pembelian_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 8, 46, 14));
 
         jLabel2.setText("No Faktur");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 33, -1, -1));
+
+        txt_pembelian_faktur.setEditable(false);
+        jPanel1.add(txt_pembelian_faktur, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 28, 203, -1));
 
         txt_pembelian_tgl.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 txt_pembelian_tglPropertyChange(evt);
             }
         });
+        jPanel1.add(txt_pembelian_tgl, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 72, 203, -1));
 
         jLabel3.setText("Tanggal Pembelian");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 72, -1, -1));
 
         jLabel4.setText("Total Harga");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 121, -1, -1));
+        jPanel1.add(txt_pembelian_harga, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 116, 203, -1));
 
         jLabel5.setText("Pemasok");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 164, -1, -1));
 
         cmb_pemasok.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pemasok--" }));
         cmb_pemasok.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +108,7 @@ public class FrmPembelian extends javax.swing.JFrame {
                 cmb_pemasokActionPerformed(evt);
             }
         });
+        jPanel1.add(cmb_pemasok, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 160, 203, -1));
 
         btn_simpan.setText("Simpan");
         btn_simpan.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +116,7 @@ public class FrmPembelian extends javax.swing.JFrame {
                 btn_simpanActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 233, 100, -1));
 
         btn_ubah.setText("Ubah");
         btn_ubah.addActionListener(new java.awt.event.ActionListener() {
@@ -109,6 +124,7 @@ public class FrmPembelian extends javax.swing.JFrame {
                 btn_ubahActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 233, 90, -1));
 
         btn_hapus.setText("Hapus");
         btn_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -116,72 +132,8 @@ public class FrmPembelian extends javax.swing.JFrame {
                 btn_hapusActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(72, 72, 72)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_pembelian_tgl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_pembelian_harga)
-                            .addComponent(cmb_pemasok, 0, 203, Short.MAX_VALUE)
-                            .addComponent(txt_pembelian_faktur)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(txt_pemasok_id, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txt_pembelian_id, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(17, 17, 17))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(btn_simpan)
-                .addGap(18, 18, 18)
-                .addComponent(btn_ubah, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txt_pembelian_id, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txt_pembelian_faktur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_pembelian_tgl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_pembelian_harga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmb_pemasok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(2, 2, 2)
-                .addComponent(txt_pemasok_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_simpan)
-                    .addComponent(btn_ubah)
-                    .addComponent(btn_hapus))
-                .addContainerGap(11, Short.MAX_VALUE))
-        );
+        jPanel1.add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 233, 90, -1));
+        jPanel1.add(txt_pemasok_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 189, 31, -1));
 
         tbl_pembelian.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -217,8 +169,8 @@ public class FrmPembelian extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_cari)
                                     .addGroup(layout.createSequentialGroup()
@@ -233,14 +185,14 @@ public class FrmPembelian extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -254,7 +206,15 @@ public class FrmPembelian extends javax.swing.JFrame {
 
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         try {
+            if(btn_simpan.getText().equals("Batal")){
+             model.Bersih(this);
+             model.AutoNomor(this);
+             btn_ubah.setVisible(false);
+             btn_hapus.setVisible(false);
+             btn_simpan.setText("Simpan");
+            } else if(btn_simpan.getText().equals("Simpan")) {
             model.Simpan(this);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPembelian.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -287,6 +247,7 @@ public class FrmPembelian extends javax.swing.JFrame {
     private void tbl_pembelianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_pembelianMouseClicked
         try {
             model.KlikTabel(this);
+            btn_simpan.setText("Batal");
         } catch (SQLException ex) {
             Logger.getLogger(FrmPembelian.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -124,6 +124,8 @@ public class Produk_model implements Produk {
     @Override
     public void KlikTabel(FrmProduk brg) throws SQLException {
         try {
+            brg.btn_ubah.setVisible(true);
+            brg.btn_hapus.setVisible(true);
             int pilih = brg.tbl_produk.getSelectedRow();
             String s = (String)brg.tbl_produk.getModel().getValueAt(pilih, 4);
             SimpleDateFormat f = new SimpleDateFormat("yyyy-M-dd");

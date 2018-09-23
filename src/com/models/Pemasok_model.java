@@ -129,6 +129,8 @@ public class Pemasok_model implements Pemasok {
     @Override
     public void KlikTabel(FrmPemasok spl) throws SQLException {
         try {
+            spl.btn_ubah.setVisible(true);
+            spl.btn_hapus.setVisible(true);
             int pilih = spl.tbl_pemasok.getSelectedRow();
             if (pilih == -1) {
                 return;
