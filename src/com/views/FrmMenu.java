@@ -220,6 +220,7 @@ public class FrmMenu extends javax.swing.JFrame {
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         try {
             new FrmProduk().show();
+            dispose();
         } catch (SQLException ex) {
             Logger.getLogger(FrmMenu.class.getName()).log(Level.SEVERE, null, ex);
         }

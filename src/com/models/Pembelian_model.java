@@ -100,7 +100,7 @@ public class Pembelian_model implements Pembelian {
         try {
             Connection con = koneksi.getKoneksi();
             Statement st = con.createStatement();
-            String sql = "SELECT * FROM pembelian LEFT JOIN pemasok ON pembelian.pemasok_pemasok_id = pemasok.pemasok_id ORDER BY pembelian_faktur ASC";
+            String sql = "SELECT * FROM pembelian LEFT JOIN pemasok ON pembelian.pemasok_pemasok_id = pemasok.pemasok_id ORDER BY pembelian_faktur DESC";
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 Object[] data;
@@ -131,7 +131,7 @@ public class Pembelian_model implements Pembelian {
     public void KlikTabel(FrmPembelian pb) throws SQLException {
         try {
             int pilih = pb.tbl_pembelian.getSelectedRow();
-            String s = (String)pb.tbl_pembelian.getModel().getValueAt(pilih, 4);
+            String s = (String)pb.tbl_pembelian.getModel().getValueAt(pilih, 2);
             SimpleDateFormat f = new SimpleDateFormat("yyyy-M-dd");
             Date d = f.parse(s);
             if (pilih == -1) {
@@ -140,9 +140,10 @@ public class Pembelian_model implements Pembelian {
             pb.txt_pembelian_id.setText(pb.tbl.getValueAt(pilih, 0).toString());
             pb.txt_pembelian_faktur.setText(pb.tbl.getValueAt(pilih, 1).toString());
             pb.txt_pembelian_tgl.setDate(d);
-            pb.txt_pembelian_harga.setText(pb.tbl.getValueAt(pilih, 2).toString());
-            pb.cmb_pemasok.setSelectedItem(pb.tbl.getValueAt(pilih, 3).toString());
+            pb.txt_pembelian_harga.setText(pb.tbl.getValueAt(pilih, 3).toString());
+            pb.cmb_pemasok.setSelectedItem(pb.tbl.getValueAt(pilih, 4).toString());
         } catch (Exception e) {
+            System.out.println(e);
         }
         try {
             Connection con = koneksi.getKoneksi();
@@ -151,7 +152,7 @@ public class Pembelian_model implements Pembelian {
             ResultSet rs = st.executeQuery(sql);
         
             while(rs.next()){
-                Object[] data = new Object[3];
+                Object[] data = new Object[2];
                 data[1] = rs.getString(1);
                 pb.cmb_pemasok.setSelectedItem(rs.getString("pemasok_nama"));
             }
